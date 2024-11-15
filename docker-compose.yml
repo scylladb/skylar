@@ -1,0 +1,19 @@
+services:
+  scylladb:
+    image: scylladb/scylla:6.1.2
+    volumes:
+      - scylla_data:/var/lib/scylla
+    shm_size: 4g
+    ports:
+      - "9042:9042"
+      - "9180:9180"
+    restart: always
+    mem_limit: 4G
+    command: --smp 1
+
+  skylar:
+    build: .
+    image: timkoopmans/skylar
+
+volumes:
+  scylla_data:
